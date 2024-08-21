@@ -19,7 +19,7 @@ services:
     container_name: sentiment-analysis-be
     environment:
       - FLASK_ENV=development
-      - DATABASE_URI=mysql+pymysql://testuser:testpassword@mysql:3306/flaskdb
+      - DATABASE_URI=mysql+pymysql://testuser:testpassword@mysql:3306/sentimentanalysisdb
     ports:
       - "5001:5001"
     depends_on:

@@ -1,15 +1,26 @@
-from .metrics import SentimentMetrics
+from app.models import SentimentAnalysisInfo
+from app.sentiment_analysis import SentimentAnalysisDao
 from textblob import TextBlob
+from datetime import datetime
         
 class SentimentAnalysisManager:
-    def process(self, text: str) -> SentimentMetrics:
-        blob = TextBlob(text)
-        sentiment_analysis_result = blob.sentiment
+    def __init__(self, dao: SentimentAnalysisDao) -> None:
+        self.dao = dao
 
-        metrics = SentimentMetrics(
-            polarity=sentiment_analysis_result.polarity,
-            subjectivity=sentiment_analysis_result.subjectivity
+    def process(self, text: str) -> SentimentAnalysisInfo:
+        # perform sentiment analysis task using ML
+        blob = TextBlob(text)
+        raw_result = blob.sentiment
+
+        sentiment_analysis_result = SentimentAnalysisInfo(
+            text=text,
+            polarity=raw_result.polarity,
+            subjectivity=raw_result.subjectivity,
+            timestamp=datetime.now()
         )
 
-        return metrics
+        # save result into DB
+        self.dao.save(sentiment_analysis_result)
+
+        return sentiment_analysis_result
         

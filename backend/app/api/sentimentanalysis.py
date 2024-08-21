@@ -1,12 +1,12 @@
 from flask import Blueprint, request, jsonify
 from errors import not_valid_json_error, invalid_parameter_error
-from app.sentiment_analysis.manager import SentimentAnalysisManager
+from app.sentiment_analysis import SentimentAnalysisManager, SentimentAnalysisDao
 
 sentiment_analysis_bp = Blueprint("sentiment_analysis_bp", __name__)
-sentiment_analysis_manager = SentimentAnalysisManager()
+sentiment_analysis_manager = SentimentAnalysisManager(SentimentAnalysisDao())
 
 @sentiment_analysis_bp.route("/api/sentimentanalysis", methods=["POST"])
-def sentiment_analysis():
+def perform_sentiment_analysis():
     if not request.is_json:
         return not_valid_json_error()
     
@@ -22,3 +22,4 @@ def sentiment_analysis():
     sentiment_result = sentiment_analysis_manager.process(input_text)
 
     return jsonify(sentiment_result.to_dict())
+ 
