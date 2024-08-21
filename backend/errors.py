@@ -7,5 +7,5 @@ def not_valid_json_error():
 
 def invalid_parameter_error(param: str):
     return jsonify({
-        "error": "Invalid '{param}' parameter"
+        "error": "Invalid '%s' parameter" % param
     }), 400
