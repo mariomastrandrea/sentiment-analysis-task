@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './SentimentAnalysisPage.css'
 import SimpleTextAreaForm from '../common/SimpleTextAreaForm';
+import perform_sentiment_analysis from '../../network/client'
 
 function SentimentAnalysisPage() {
     const [result, setResult] = useState(null);
@@ -10,7 +11,17 @@ function SentimentAnalysisPage() {
         setError(null);
         setResult(null);
 
+        try {
+            const sentiment_analysis_result = await perform_sentiment_analysis()
 
+            setResult({
+                polarity: sentiment_analysis_result.polarity,
+                subjectivity: sentiment_analysis_result.subjectivity
+            })
+        }
+        catch (error) {
+            setError(error.message)
+        }
     }
 
     return (

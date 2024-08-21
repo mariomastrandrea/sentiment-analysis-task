@@ -1,11 +1,15 @@
 
 
+const baseUrl = "http://localhost:5001/api/"
+
 async function perform_sentiment_analysis(text) {
     try {
-        const response = await fetch('http://localhost:5001/api/sentimentanalysis', {
+        const endpointUrl = baseUrl + "sentimentanalysis"
+
+        const response = await fetch(endpointUrl, {
             method: 'POST',
             headers: {
-            'Content-Type': 'application/json',
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify({ text }),
         });
@@ -22,3 +26,5 @@ async function perform_sentiment_analysis(text) {
         throw new Error('An unexpected network error occurred')
     }
 }
+
+export default perform_sentiment_analysis;
