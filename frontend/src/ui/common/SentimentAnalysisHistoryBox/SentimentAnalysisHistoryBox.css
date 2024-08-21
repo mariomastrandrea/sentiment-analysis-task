@@ -1,0 +1,28 @@
+.sentiment-analysis-history-box {
+    margin: 1.25rem auto;
+    max-width: 50rem;
+    text-align: left;
+}
+  
+.sentiment-analysis-history-box table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.sentiment-analysis-history-box th,
+.sentiment-analysis-history-box td {
+    padding: 0.75rem;
+    border: 0.0625rem solid #ddd;
+}
+  
+.sentiment-analysis-history-box th {
+    background-color: #f2f2f2;
+}
+  
+.sentiment-analysis-history-box tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+  
+.sentiment-analysis-history-box tr:hover {
+    background-color: #f1f1f1;
+}

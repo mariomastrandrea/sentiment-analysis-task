@@ -1,4 +1,4 @@
-.SentimentAnalysisPage textarea {
+.sentiment-analysis-page textarea {
     width: 100%;
     max-width: 40vw;
     margin: 1rem 0;
@@ -6,17 +6,25 @@
     font-size: 1rem;
 }
   
-.SentimentAnalysisPage button {
+.sentiment-analysis-page button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     cursor: pointer;
 }
   
-.SentimentAnalysisPage .result {
+.sentiment-analysis-page .result {
     margin-top: 2.5rem;
 }
   
-.SentimentAnalysisPage .error {
+.sentiment-analysis-page .error {
     color: red;
     margin-top: 1.25rem;
+}
+
+.sentiment-analysis-page .sentiment-analysis-history-box {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;     
 }

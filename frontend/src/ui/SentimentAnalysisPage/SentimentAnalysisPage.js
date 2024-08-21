@@ -1,12 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './SentimentAnalysisPage.css'
 import SimpleTextAreaForm from '../common/SimpleTextAreaForm';
-import perform_sentiment_analysis from '../../network/client'
+import { perform_sentiment_analysis, fetch_sentiment_analysis_history } from '../../network/client'
 import SentimentAnalysisResultBox from '../common/SentimentAnalysisResultBox';
+import SentimentAnalysisHistoryBox from '../common/SentimentAnalysisHistoryBox/SentimentAnalysisHistoryBox';
 
 function SentimentAnalysisPage() {
     const [outputMetrics, setOutputMetrics] = useState(null);
     const [error, setError] = useState(null);
+    const [history, setHistory] = useState(null)
+
+    const fetchData = async () => {
+      try {
+          const fetched_history = await fetch_sentiment_analysis_history()
+
+          setHistory(
+              fetched_history
+                .sort((a, b) => b.timestamp - a.timestamp)    // inverse chronological order
+                .map(x => ({
+                    text: x.text,
+                    polarity: x.polarity,
+                    subjectivity: x.subjectivity,
+                    timestamp: new Date(x.timestamp * 1000).toLocaleString()
+                }))
+          )
+      }
+      catch (error) {
+          setError(error.message)
+      }
+  }
+
+    useEffect(() => {
+        fetchData()
+    }, [outputMetrics])
 
     const handleSubmittedText = async (text) => {
         setError(null);
@@ -26,7 +52,7 @@ function SentimentAnalysisPage() {
     }
 
     return (
-        <div className='SentimentAnalysisPage'>
+        <div className='sentiment-analysis-page'>
           <header className="App-header">
           <h1>Sentiment Analysis</h1>
           
@@ -41,6 +67,8 @@ function SentimentAnalysisPage() {
               polarity={outputMetrics.polarity}
               subjectivity={outputMetrics.subjectivity} 
           />}
+
+          {history && <SentimentAnalysisHistoryBox entries={history} />}
         </header>
       </div>
     );
