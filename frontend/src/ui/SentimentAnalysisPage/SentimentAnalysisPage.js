@@ -2,19 +2,20 @@ import React, { useState } from 'react'
 import './SentimentAnalysisPage.css'
 import SimpleTextAreaForm from '../common/SimpleTextAreaForm';
 import perform_sentiment_analysis from '../../network/client'
+import SentimentAnalysisResultBox from '../common/SentimentAnalysisResultBox';
 
 function SentimentAnalysisPage() {
-    const [result, setResult] = useState(null);
+    const [outputMetrics, setOutputMetrics] = useState(null);
     const [error, setError] = useState(null);
 
     const handleSubmittedText = async (text) => {
         setError(null);
-        setResult(null);
+        setOutputMetrics(null);
 
         try {
             const sentiment_analysis_result = await perform_sentiment_analysis(text ?? "")
 
-            setResult({
+            setOutputMetrics({
                 polarity: sentiment_analysis_result.polarity,
                 subjectivity: sentiment_analysis_result.subjectivity
             })
@@ -36,13 +37,10 @@ function SentimentAnalysisPage() {
 
           {error && <p className="error">Error: {error}</p>}
 
-          {result && (
-            <div className="result">
-              <h2>Analysis Result</h2>
-              <p><strong>Polarity:</strong> {result.polarity}</p>
-              <p><strong>Subjectivity:</strong> {result.subjectivity}</p>
-            </div>
-          )}
+          {outputMetrics && <SentimentAnalysisResultBox 
+              polarity={outputMetrics.polarity}
+              subjectivity={outputMetrics.subjectivity} 
+          />}
         </header>
       </div>
     );
