@@ -11,7 +11,8 @@ Web App solution for a simple *sentiment analysis* task.
 - **Docker** installed in your machine
 
 ### Execution
-1. Open your terminal and navigate to the project folder (sentiment-analysis-task).
+To run the project you must:
+1. Open the terminal and navigate to the project folder (sentiment-analysis-task).
 2. Then execute the following docker command to build and run the entire project (both BE+FE):
 ```shell
 docker-compose up --build
