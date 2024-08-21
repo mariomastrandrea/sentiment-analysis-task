@@ -51,3 +51,13 @@ To perform a sentiment analysis task:
     - **Polarity**: a value defining how much positive (+) or negative (-) is the sentiment of the sentence. It is a value between -1 (strongly negative sentiment) and +1 (strongly positive sentiment);
     - **Subjectivity**: a value defining how much subjective is the meaning of the sentence. It is a value between 0 (completely objective, based on facts) and +1 (completely subjective, based on feelings);
 4. You will also see the result as the last committed entry in the requests' history table
+
+## Host on AWS
+In order to host the entire project on the AWS cloud, the following high-level steps can be followed:
+1. A proper AWS account must be set up, to have access to its cloud services
+2. An EC2 machine instance must be configured, in order to host the project's Docker containers
+3. Once the EC2 machine has been started (and properly configured), you must connect to it with ssh from your local machine
+4. Then the necessary dependencies must be installed. In this case we just need *docker* and *docker-compose*, and *git* if we want to clone the project directory directly from the cloud machine
+5. Once docker has been installed, it must be also started on the machine
+6. After that, the project files must be uploaded. This can be done with a secure copy from the local machine, or (better) cloning the project's git repository on the machine itself
+7. Follow the steps in the Configuration section to run the project (navigate to the project directory + build/start docker containers with docker-compose command)
