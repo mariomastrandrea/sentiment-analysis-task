@@ -22,7 +22,6 @@ async function perform_sentiment_analysis(text) {
         return result
     }
     catch (error) {
-        console.log(error)
         throw new Error('An unexpected network error occurred')
     }
 }

@@ -12,7 +12,7 @@ function SentimentAnalysisPage() {
         setResult(null);
 
         try {
-            const sentiment_analysis_result = await perform_sentiment_analysis()
+            const sentiment_analysis_result = await perform_sentiment_analysis(text ?? "")
 
             setResult({
                 polarity: sentiment_analysis_result.polarity,
