@@ -1,11 +1,15 @@
-from metrics import SentimentMetrics
+from .metrics import SentimentMetrics
+from textblob import TextBlob
         
 class SentimentAnalysisManager:
     def process(self, text: str) -> SentimentMetrics:
-        print(">>> Processing text: '%s'" % text)
+        blob = TextBlob(text)
+        sentiment_analysis_result = blob.sentiment
 
-        return SentimentMetrics(
-            polarity=0.75,
-            subjectivity=0.2
+        metrics = SentimentMetrics(
+            polarity=sentiment_analysis_result.polarity,
+            subjectivity=sentiment_analysis_result.subjectivity
         )
+
+        return metrics
         
